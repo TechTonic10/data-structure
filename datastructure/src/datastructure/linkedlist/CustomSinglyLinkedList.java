@@ -8,7 +8,7 @@ public class CustomSinglyLinkedList {
 	
 	public CustomSinglyLinkedList(Object value) {
 		this.head = new Node(value);		
-		this.tail = head;
+		this.tail = this.head;
 		this.length = 1;
 	}
 	
