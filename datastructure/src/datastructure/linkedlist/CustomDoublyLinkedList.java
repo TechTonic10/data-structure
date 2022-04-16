@@ -21,6 +21,42 @@ public class CustomDoublyLinkedList {
 		return this;
 	}
 	
+	public CustomDoublyLinkedList prepend(Object value) {
+		Node node = new Node(value);		
+		node.next=this.head;
+		this.head.previous=node;
+		this.head=node;
+		this.length++;
+		return this;
+	}
+	
+	public CustomDoublyLinkedList insert(int index, Object value) {
+		if(index<=0) {
+			return prepend(value) ;
+		} else if(index<this.length) {
+			Node nodeToReplace = traverseToIndex(index);
+			Node node = new Node(value); 			
+			node.previous = nodeToReplace.previous;
+			node.next=nodeToReplace;
+			nodeToReplace.previous=node;
+			this.length++;
+			return this;
+		}
+		return this;
+	}
+	
+	private Node traverseToIndex(int index) {
+		
+		int counter=1;
+		Node node = this.head;
+		while(counter <= index) {
+			node = (Node) node.next;
+			counter++;		
+		}
+		
+		return node;
+	}
+	
 	
 	private class Node{		
 		Object value;
@@ -33,8 +69,8 @@ public class CustomDoublyLinkedList {
 		
 		@Override
 		public String toString() {
-			return "value="+value;
-			//return "Node [value=" + value + ", next=" + next + ", previous=" + previous + "]";
+			//return "Node [value="+value+ "]";
+			return "Node [value=" + value + ", next=" + (null != next ? ((Node)next).value : null) + ", previous=" + (null != previous ? ((Node)previous).value : null) + "]";
 		}					
 	}
 
